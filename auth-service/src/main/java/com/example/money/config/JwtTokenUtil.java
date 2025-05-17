@@ -43,7 +43,7 @@ public class JwtTokenUtil {
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(jwtSecret)
+                    .setSigningKey(secret)
                     .parseClaimsJws(token);
             return true;
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class JwtTokenUtil {
 
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(jwtSecret)
+                .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
     }
