@@ -1,5 +1,6 @@
 package com.example.money.model;
 
+import com.example.money.dto.AccountDto;
 import com.example.money.model.core.UserEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,4 +31,11 @@ public class Account extends UserEntity {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    public AccountDto toAccountDto() {
+        AccountDto accountDto = new AccountDto();
+        accountDto.setName(this.getName());
+        return accountDto;
+    }
+
 }

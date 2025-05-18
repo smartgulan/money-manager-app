@@ -5,6 +5,8 @@ public class TransactionDto {
     private String type;
     private double amount;
     private String note;
+    private String fromAccount;
+    private String toAccount;
 
     public String getType() {
         return type;
@@ -28,6 +30,22 @@ public class TransactionDto {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(String fromAccount) {
+        this.fromAccount = fromAccount;
+    }
+
+    public String getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(String toAccount) {
+        this.toAccount = toAccount;
     }
 
 }

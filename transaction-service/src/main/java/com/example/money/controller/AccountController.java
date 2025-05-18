@@ -1,5 +1,6 @@
 package com.example.money.controller;
 
+import com.example.money.dto.AccountDto;
 import com.example.money.model.Account;
 import com.example.money.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,16 @@ public class AccountController {
     @DeleteMapping("/{email}")
     public ResponseEntity<?> deleteAccount(@PathVariable String email) {
         return accountService.deleteAccount(email);
+    }
+
+    @PatchMapping("/replenish")
+    public ResponseEntity<?> replenishAccount(@RequestBody AccountDto account) {
+        return accountService.replenish(account);
+    }
+
+    @PatchMapping("/withdraw")
+    public ResponseEntity<?> withdrawAccount(@RequestBody AccountDto account) {
+        return accountService.withdraw(account);
     }
 
 }
