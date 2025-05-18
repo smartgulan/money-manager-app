@@ -1,16 +1,16 @@
 package com.example.common.service;
 
-import org.springframework.http.*;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-@Component
 public class RestTemplateService {
 
-    public <T> T send(
+    public <T, R> T send(
             String url,
             String token,
-            Class body,
+            R body,
             Class<T> classType
     ) {
         RestTemplate restTemplate = new RestTemplate();

@@ -5,6 +5,7 @@ import com.example.money.model.core.CreateEntity;
 import com.example.money.model.core.UserEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "transactions")
@@ -14,7 +15,7 @@ public class Transaction extends CreateEntity {
     private String type;
 
     @Column
-    private double amount;
+    private BigDecimal amount;
 
     @Column
     private String note;
@@ -27,11 +28,11 @@ public class Transaction extends CreateEntity {
         this.type = type;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

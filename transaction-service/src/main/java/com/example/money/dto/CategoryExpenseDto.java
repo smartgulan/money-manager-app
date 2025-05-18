@@ -1,11 +1,12 @@
 package com.example.money.dto;
 
+import java.math.BigDecimal;
 import java.time.Month;
 
 public class CategoryExpenseDto {
 
     private Month month;
-    private double totalSpent;
+    private BigDecimal totalSpent;
 
     public Month getMonth() {
         return month;
@@ -15,11 +16,11 @@ public class CategoryExpenseDto {
         this.month = month;
     }
 
-    public double getTotalSpent() {
+    public BigDecimal getTotalSpent() {
         return totalSpent;
     }
 
-    public void setTotalSpent(double totalSpent) {
+    public void setTotalSpent(BigDecimal totalSpent) {
         this.totalSpent = totalSpent;
     }
 

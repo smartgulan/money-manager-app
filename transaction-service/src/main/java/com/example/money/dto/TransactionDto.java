@@ -1,12 +1,14 @@
 package com.example.money.dto;
 
+import java.math.BigDecimal;
+
 public class TransactionDto {
 
     private String type;
-    private double amount;
+    private BigDecimal amount;
     private String note;
-    private String fromAccount;
-    private String toAccount;
+    private String fromAccountEmail;
+    private String toAccountEmail;
 
     public String getType() {
         return type;
@@ -16,11 +18,11 @@ public class TransactionDto {
         this.type = type;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -32,20 +34,20 @@ public class TransactionDto {
         this.note = note;
     }
 
-    public String getFromAccount() {
-        return fromAccount;
+    public String getFromAccountEmail() {
+        return fromAccountEmail;
     }
 
-    public void setFromAccount(String fromAccount) {
-        this.fromAccount = fromAccount;
+    public void setFromAccountEmail(String fromAccountEmail) {
+        this.fromAccountEmail = fromAccountEmail;
     }
 
-    public String getToAccount() {
-        return toAccount;
+    public String getToAccountEmail() {
+        return toAccountEmail;
     }
 
-    public void setToAccount(String toAccount) {
-        this.toAccount = toAccount;
+    public void setToAccountEmail(String toAccountEmail) {
+        this.toAccountEmail = toAccountEmail;
     }
 
 }

@@ -13,7 +13,6 @@ public class UserEntityListener {
         if (principal instanceof UserDto) {
             UserDto user = (UserDto) principal;
             entity.setUserEmail(user.getEmail());
-            entity.setCurrency(user.getCurrency());
         }
     }
 

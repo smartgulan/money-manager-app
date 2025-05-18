@@ -23,12 +23,13 @@ public class AccountService {
     @Autowired
     private TokenService tokenService;
 
-    public Account createAccount(Account account) {
+    public ResponseEntity<?> createAccount(Account account) {
         Account accountExitsts = accountRepository.findByUserEmail(tokenService.getEmail());
         if (accountExitsts != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account already exists");
+            return ResponseEntity.badRequest().body(new ErrorMessage("Account with this email already exists", "error", new Date()));
         }
-        return accountRepository.save(account);
+        accountRepository.save(account);
+        return ResponseEntity.ok().body(account);
     }
 
     public ResponseEntity<?> deleteAccount(String email) {
@@ -43,7 +44,7 @@ public class AccountService {
     public ResponseEntity<?> replenish(AccountDto accountDto) {
         try {
             Account account = accountRepository.findByUserEmail(accountDto.getReplenisherEmail());
-            account.setBalance(account.getBalance() + accountDto.getAmount());
+            account.setBalance(account.getBalance().add(accountDto.getAmount()));
             accountRepository.save(account);
             return ResponseEntity.accepted().body(account);
         } catch (Exception e) {
@@ -55,10 +56,11 @@ public class AccountService {
     public ResponseEntity<?> withdraw(AccountDto accountDto) {
         Account account = accountRepository.findByUserEmailAndName(accountDto.getWithdrawalEmail(), accountDto.getName())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
-        if (account.getBalance() < accountDto.getAmount()) {
+
+        if (account.getBalance().compareTo(accountDto.getAmount()) < 0) {
             return ResponseEntity.badRequest().body(new ErrorMessage("Not enough balance", "error", new Date()));
         }
-        account.setBalance(account.getBalance() - accountDto.getAmount());
+        account.setBalance(account.getBalance().subtract(accountDto.getAmount()));
         accountRepository.save(account);
         return ResponseEntity.ok().body(account);
     }

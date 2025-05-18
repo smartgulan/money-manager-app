@@ -1,10 +1,11 @@
 package com.example.money.dto;
 
+import java.math.BigDecimal;
+
 public class AccountDto {
 
     private String name;
-    private double amount;
-    private double withdrawalAmount;
+    private BigDecimal amount;
     private String withdrawalEmail;
     private String replenisherEmail;
 
@@ -16,20 +17,12 @@ public class AccountDto {
         this.name = name;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public double getWithdrawalAmount() {
-        return withdrawalAmount;
-    }
-
-    public void setWithdrawalAmount(double withdrawalAmount) {
-        this.withdrawalAmount = withdrawalAmount;
     }
 
     public String getWithdrawalEmail() {

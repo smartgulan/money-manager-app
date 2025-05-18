@@ -5,6 +5,7 @@ import com.example.money.model.core.UserEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "accounts")
@@ -14,7 +15,7 @@ public class Account extends UserEntity {
     private String name;
 
     @Column
-    private double balance = 0;
+    private BigDecimal balance = BigDecimal.valueOf(0);
 
     public String getName() {
         return name;
@@ -24,11 +25,11 @@ public class Account extends UserEntity {
         this.name = name;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

@@ -10,7 +10,10 @@ import com.example.money.model.Transaction;
 import com.example.money.repository.AccountRepository;
 import com.example.money.repository.CategoryRepository;
 import com.example.money.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ import java.util.Date;
 
 @Service
 public class TransactionService {
+
+    private Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -48,17 +53,23 @@ public class TransactionService {
                 expense.setCategory(category);
                 expenseService.createExpense(expense, token);
 
-                AccountDto fromAccount = accountRepository.findByUserEmail(transactionDto.getFromAccount()).toAccountDto();
-                fromAccount.setWithdrawalAmount(transactionDto.getAmount());
-                accountService.withdraw(fromAccount);
+                AccountDto fromAccount = accountRepository.findByUserEmail(transactionDto.getFromAccountEmail()).toAccountDto();
+                fromAccount.setWithdrawalEmail(transactionDto.getFromAccountEmail());
+                fromAccount.setAmount(transactionDto.getAmount());
+                ResponseEntity<?> withdrawResult = accountService.withdraw(fromAccount);
+                if (withdrawResult.getStatusCode() != HttpStatus.OK) {
+                    return withdrawResult;
+                }
 
-                AccountDto toAccount = accountRepository.findByUserEmail(transactionDto.getToAccount()).toAccountDto();
+                AccountDto toAccount = accountRepository.findByUserEmail(transactionDto.getToAccountEmail()).toAccountDto();
                 toAccount.setAmount(transactionDto.getAmount());
+                toAccount.setReplenisherEmail(transactionDto.getToAccountEmail());
                 accountService.replenish(toAccount);
             }
             Transaction trans = transactionRepository.save(transaction);
             return ResponseEntity.ok().body(trans);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(new ErrorMessage("Error creating transaction", "error", new Date()));
         }
     }

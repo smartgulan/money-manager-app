@@ -16,7 +16,8 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<?> createTransaction(@RequestBody TransactionDto transaction, @RequestHeader("Authorization") String token) {
-        return transactionService.createTransaction(transaction, token);
+        String jwt = token.substring(7);
+        return transactionService.createTransaction(transaction, jwt);
     }
 
 }

@@ -2,13 +2,14 @@ package com.example.money.model;
 
 import com.example.money.model.core.UserEntity;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "expenses")
 public class Expense extends UserEntity {
 
     @Column
-    private double amount;
+    private BigDecimal amount;
 
     @Column
     private String note;
@@ -17,11 +18,11 @@ public class Expense extends UserEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
