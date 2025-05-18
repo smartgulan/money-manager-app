@@ -34,7 +34,7 @@ public class TransactionService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public ResponseEntity<?> createTransaction(TransactionDto transactionDto) {
+    public ResponseEntity<?> createTransaction(TransactionDto transactionDto, String token) {
         try {
             Transaction transaction = new Transaction();
             transaction.setNote(transactionDto.getNote());
@@ -46,7 +46,7 @@ public class TransactionService {
                 expense.setNote(transaction.getNote());
                 expense.setAmount(transaction.getAmount());
                 expense.setCategory(category);
-                expenseService.createExpense(expense);
+                expenseService.createExpense(expense, token);
 
                 AccountDto fromAccount = accountRepository.findByUserEmail(transactionDto.getFromAccount()).toAccountDto();
                 fromAccount.setWithdrawalAmount(transactionDto.getAmount());

@@ -17,6 +17,8 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.springframework:spring-web:5.3.30'
+    implementation 'org.springframework:spring-context:5.3.30'
 }
 
 test {
